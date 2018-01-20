@@ -18,6 +18,12 @@ app.use((req, res, next) => {
   next();
 });
 var router = new express.Router();
+const data = require('./data.json');
+console.log(data);
+
+router.get("/data", function(req, res) {
+ res.send(JSON.stringify(data));
+});
 router.get("/*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/public/index.html"));
 });

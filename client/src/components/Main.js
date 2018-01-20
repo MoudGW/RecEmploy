@@ -24,7 +24,7 @@ class Main extends Component {
     displayresult=function(){
      return(
     this.state.jobs.map(job =>
-        <li className="collection-item" key={job._id}>  
+        <li className="collection-item" style={{    padding: '50px'}} key={job._id}>  
         <span>
           <h3>{job.title}</h3>
         </span>
@@ -34,7 +34,9 @@ class Main extends Component {
         <span><strong>Type: </strong>{job.type}</span>
         <p><strong>Locations: </strong>{job.locations}</p>
         <p><strong>classification: </strong>{job.classification}</p>
-         <div><button>apply</button></div>
+         <div className='right'>
+         <button className='waves-effect waves-light btn'>apply</button>
+         </div>
          </li>
         )
     )

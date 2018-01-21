@@ -1,30 +1,26 @@
 import React, { Component } from "react";
-import API from '../API/API'
+import API from '../API/API';
 class Main extends Component {
-     state = {
-      search: '',
-      jobs:[]
-    }
-    componentDidMount() {
-        API.getData().then((res) => {
-          this.setState({jobs:res.data.jobs});  
-          console.log(this.state.jobs);
-        });
-
+    state = {
+      search:'',
+      jobs:[],
+      showresult:false
     }
     onChange= function(event) {
       this.setState({search: event.target.value});
     }
     onClick= function(event) {
+        event.preventDefault();
+    API.getData(this.state.search).then((res) => {
+      this.setState({jobs:res.data});
+       console.log(this.state.jobs);
+    });
 
     }
-    handleApply= function(){
-
-    }
-    displayresult=function(){
-     return(
+    displayresult=() => {
+    return(
     this.state.jobs.map(job =>
-        <li className="collection-item" style={{    padding: '50px'}} key={job._id}>  
+        <li className="collection-item" style={{padding:'50px',borderBottom:'1px solid gray'}} key={job._id}>  
         <span>
           <h3>{job.title}</h3>
         </span>
@@ -39,9 +35,8 @@ class Main extends Component {
          </div>
          </li>
         )
-    )
+     )
     }
-    
       render() {
         return (
         <div>  
@@ -58,14 +53,14 @@ class Main extends Component {
         <div className="row">
         <div className="col s4 offset-s4 pull-s2 center">
         <label><h1>Search for Jobs</h1></label>
-        <div className="input-field center" onChange={this.onChange.bind(this)}>
-        <input id="search" type="search"/>
-        <i className="material-icons Medium">search</i> 
+        <div className="input-field center-align" onChange={this.onChange.bind(this)}>
+        <input className="center-align" id="search" type="search"/>
+        <i onClick={this.onClick.bind(this)} className="material-icons Medium">search</i>
         </div>
         </div>
         </div>
-       <ul className="collection">
-        {this.displayresult()}
+        <ul>
+        {this.state.jobs.length ? this.displayresult() : null}
         </ul>
         </div>
         </div>

@@ -18,7 +18,9 @@
     "nodemon": "^1.11.0"
   },
   "dependencies": {
+    "bluebird": "^3.5.1",
     "body-parser": "^1.17.2",
-    "express": "^4.15.4"
+    "express": "^4.15.4",
+    "mongoose": "^5.0.1"
   }
 }

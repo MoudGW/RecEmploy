@@ -28,7 +28,7 @@ var jobsController = require("./controllers/routes.js");
 var router = new express.Router();
 router.get("/data/:search", jobsController.findjob);
 router.get("/data/", jobsController.findall);
-router.get("/init", jobsController.init);
+router.post("/addjob", jobsController.insertjob);
 const db = process.env.MONGODB_URI || "mongodb://localhost/rec";
 mongoose.connect(db, function(error) {
   // Log any errors connecting with mongoose

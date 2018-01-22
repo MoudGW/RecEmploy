@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 var JobsSchema = new Schema({
 
-title: {
+title:{
     type: [String],
     required: true
   },
@@ -24,7 +24,12 @@ title: {
   classification: {
     type: String,
     required: true
+  },
+  question:{
+    type: [String],
+    required: true
   }
+
 });
 JobsSchema.index({title: 'text'});
 // Create the Recruiter  model with Mongoose

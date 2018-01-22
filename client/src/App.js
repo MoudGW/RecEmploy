@@ -1,18 +1,16 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch }  from "react-router-dom";
 import './App.css';
-import Main from "./pages/Main";
-import Homepage from "./pages/Homepage";
-
+import Jobhome from "./components/Jobhome";
+import Rec_home from "./components/Rec_home";
 const App = () =>
-
   <Router>
-  <div>
+    <div>
     <Switch>
-      <Route exact path="/" component={Homepage} />
-      <Route exact path="/main" component={Main} />
+        <Route exact path="/Jobhome" component={Jobhome}/>
+        <Route exact path="/Rec_home" component={Rec_home}/>
     </Switch>
-  </div>
-</Router>;
+    </div>
+  </Router>;
 
 export default App;

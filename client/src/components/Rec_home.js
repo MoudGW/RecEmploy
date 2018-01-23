@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import API from '../API/API';
 class Rec_home extends Component {
- state={
+state={
   title:'',
   location:'',
   classification:'',

@@ -51,9 +51,9 @@ class Jobhome extends Component {
         </nav>
         <div className="container bar">
         <div className="row">
-        <div className="col s4 offset-s4 pull-s2 center">
+        <div className="col l12 center">
         <label><h1>Search for Jobs</h1></label>
-        <div className="input-field center-align" onChange={this.onChange.bind(this)}>
+        <div className="input-field flow-text center-align" onChange={this.onChange.bind(this)}>
         <input className="center-align" id="search" type="search"/>
         <i onClick={this.onClick.bind(this)} className="material-icons Medium">search</i>
         </div>

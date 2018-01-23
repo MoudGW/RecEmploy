@@ -31,7 +31,7 @@ router.get("/:email/:pwd", jobsController.finduser);
 router.get("/data/", jobsController.findall);
 router.post("/addjob", jobsController.insertjob);
 router.post("/adduser", jobsController.insertuser);
-const db = process.env.MONGODB_URI || "mongodb://localhost/rec2";
+const db = process.env.MONGODB_URI || "mongodb://localhost/rec";
 mongoose.connect(db, function(error) {
   // Log any errors connecting with mongoose
   if (error) {

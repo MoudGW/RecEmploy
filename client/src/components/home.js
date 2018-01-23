@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from 'react-router-dom'
 import API from '../API/API';
 import Modal from 'react-modal';
 const customStyles = {
@@ -11,7 +12,7 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)'
   }
-};
+};  
 class home extends Component {
   state = {
     modalIsOpen1: false,
@@ -23,6 +24,9 @@ class home extends Component {
     Email:'',
     Resume:''
   };
+  componentDidMount() {
+    console.log(this);
+  }
   openModal1() {
     this.setState({modalIsOpen1: true});
   }
@@ -56,16 +60,15 @@ API.newuser(user).then(
   )
  }
  onClickConnect=function(event){
-   event.preventDefault();
+  event.preventDefault();
+    console.log(this);
      let Email=this.state.Email;
      let Password=this.state.Password;
     API.authentification(Email,Password).then((res) => {
-       console.log(res);
-       {res.data[0].Usertype==='Recruiter' ? this.context.router.push('/Rec_home') : window.location.reload()}
-       {res.data[0].Usertype==='JobSeeker' ? this.context.router.push('/jobhome') :  window.location.reload()}
+       {res.data[0].Usertype==='Recruiter' ?  this.props.history.push('/Rec_home') : window.location.reload()}
+       {res.data[0].Usertype==='JobSeeker' ?  this.props.history.push('/Jobhome')  : window.location.reload()}
     });
-
- }
+  }
   render() {
     return (
      <div>

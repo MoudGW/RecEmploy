@@ -1,19 +1,19 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch }  from "react-router-dom";
+import { BrowserRouter, Route,Switch}  from "react-router-dom";
 import './App.css';
 import Jobhome from "./components/Jobhome";
 import Rec_home from "./components/Rec_home";
-import home from "./components/home"
+import home from "./components/home";
+import NotFound from "./components/error";
 const App = () =>
-  <Router>
-    <div>
-       <Route exact path="/" component={home}>
-       <Switch>
-        <Route exact path="/Jobhome" component={Jobhome}/>
-        <Route exact path="/Rec_home" component={Rec_home}/>
-            </Switch>
+    <BrowserRouter>
+     <div>
+        <Route exact path="/" component={home}>
+         <Route path="*" component={NotFound} />
         </Route>
-    </div>
-  </Router>;
+        <Route  path="/Jobhome" component={Jobhome}/>
+        <Route  path="/Rec_home" component={Rec_home}/>
+      </div>
+    </BrowserRouter>
 
 export default App;

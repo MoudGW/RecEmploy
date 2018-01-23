@@ -10,25 +10,20 @@ var userschema = new Schema({
     type: String,
     required: true
   },
-
   Last: {
     type: String,
     required: true
   },
-  
   Email: {
     type: String,
     required: true
   },
-
   Pwd: {
     type: String,
     required: true
   },
-
   Photo: {
-    type: String,
-    required: true
+   type: String,
   },
   Usertype:
   {
@@ -37,11 +32,9 @@ var userschema = new Schema({
   },
   resume: {
   type: String,
-  required: true
   },
   Jobs:{
    type :[Number], 
-   required: true
   } 
 });
 

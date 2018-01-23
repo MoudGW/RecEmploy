@@ -27,9 +27,11 @@ app.use((req, res, next) => {
 var jobsController = require("./controllers/routes.js");
 var router = new express.Router();
 router.get("/data/:search", jobsController.findjob);
+router.get("/:email/:pwd", jobsController.finduser);
 router.get("/data/", jobsController.findall);
 router.post("/addjob", jobsController.insertjob);
-const db = process.env.MONGODB_URI || "mongodb://localhost/rec";
+router.post("/adduser", jobsController.insertuser);
+const db = process.env.MONGODB_URI || "mongodb://localhost/rec2";
 mongoose.connect(db, function(error) {
   // Log any errors connecting with mongoose
   if (error) {

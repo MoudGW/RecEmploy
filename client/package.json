@@ -5,9 +5,11 @@
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "axios": "^0.16.2",
+    "jsx-html-class": "^1.0.3",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-modal": "^3.1.11",
+    "react-modal-bootstrap": "^1.1.1",
     "react-router-dom": "^4.2.2",
     "react-scripts": "^1.0.17"
   },

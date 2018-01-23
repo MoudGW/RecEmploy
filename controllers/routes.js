@@ -11,19 +11,34 @@ module.exports = {
   },
   findall: function(req, res) {
   console.log("Gathering saved articles from the db");
-    Jobs.find().then(function(doc) {
+    user.find().then(function(doc) {
       res.json(doc);
     }).catch(function(err) {
       res.json(err);
     });
   },
   insertjob: function(req, res) {
-    console.log(req.body);
     Jobs.create(req.body).then(function(data) {
       console.log("data:", data);
     }).catch(function(err) {
       res.json(err);
     });
+  },
+  insertuser: function(req, res) {
+    user.create(req.body).then(function(data) {
+      console.log("data:", data);
+    }).catch(function(err) {
+      res.json(err);
+    });
+  },
+  finduser: function(req,res){
+    user.find({Email:req.params.email,Pwd:req.params.pwd}).then(function(user) {
+        console.log(user);
+      res.json(user);
+    }).catch(function(err) {
+      res.json(err);
+    });
   }
+
 
 };

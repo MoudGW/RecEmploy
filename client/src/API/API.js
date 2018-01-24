@@ -11,6 +11,15 @@ const API = {
  },
  authentification: function(email,pwd) {
     return axios.get("/"+email+"/"+pwd);
+ },
+ upload: function(file){
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("tags", `codeinfuse, medium, gist`);
+    formData.append("upload_preset", "ejqnqab8");
+    formData.append("api_key", "777292621975837"); 
+    formData.append("timestamp", (Date.now() / 1000) | 0);
+    return axios.post("https://api.cloudinary.com/v1_1/codeinfuse/image/upload", formData)
  }
 
 }

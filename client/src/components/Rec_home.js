@@ -30,17 +30,17 @@ API.addjob(data).then(
 render() {
   return (
     <div>  
-    <nav>
-    <div className="nav-wrapper blue">
-    <a className="brand-logo text-white">RecEmploy<i className="large material-icons">insert_chart</i></a>
-    <ul id="nav-mobile" className="right hide-on-med-and-down">
-    <li>
-    <a href="#">Profile</a>
-    </li>
-    <li className='red'><a href="#">Sign Out</a></li>
-    </ul>
-    </div>
-    </nav>
+           <div className="navbar-fixed">
+        <nav className="grey lighten-2">
+        <div className="nav-wrapper container">
+        <a className="brand-logo">RecEmploy<i className="large material-icons">insert_chart</i></a>
+        <ul id="nav-mobile" className="right hide-on-med-and-down">
+        <li><a className='blue-text'>Profile</a></li>
+        <li ><a className='red-text'>Sign Out</a></li>
+        </ul>
+        </div>
+        </nav>
+        </div>
     <div className="container">
     <div className="row">
     <div className="col s6">

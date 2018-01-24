@@ -22,15 +22,18 @@ class home extends Component {
     Password:'',
     Last:'',
     Email:'',
-    Resume:''
+    Resume:'',
+    disabled:'',
+    invalid: false
   };
   componentDidMount() {
-    console.log(this);
   }
   openModal1() {
     this.setState({modalIsOpen1: true});
+    this.closeModal2()
   }
   openModal2() {
+    this.closeModal1()
     this.setState({modalIsOpen2: true});
   }
   closeModal1() {
@@ -41,49 +44,62 @@ class home extends Component {
   }
   onChange= function(event) {
     console.log(event.target.value);
-  this.setState({[event.target.placeholder]: event.target.value});
+    this.setState({[event.target.placeholder]: event.target.value});
   }
   onChangeUser= function(event) {
-  this.setState({user: event.target.value});
+    this.setState({user: event.target.value});
   }
   onClickSubmit= function() {
-  let user={
-    'First':this.state.First,
-    'Last':this.state.Last,
-    'Email':this.state.Email,
-    'Pwd':this.state.Password,
-    'Resume':this.state.Resume,
-    'Usertype':this.state.user
-  };
-API.newuser(user).then(
-  window.location.reload()
-  )
- }
- onClickConnect=function(event){
-  event.preventDefault();
-    console.log(this);
-     let Email=this.state.Email;
-     let Password=this.state.Password;
+    let user={
+      'First':this.state.First,
+      'Last':this.state.Last,
+      'Email':this.state.Email,
+      'Pwd':this.state.Password,
+      'resume':this.state.Resume,
+      'Usertype':this.state.user
+    };
+    API.newuser(user).then(
+      this.closeModal1()
+      ) 
+  }
+  Upload=function(event)
+  {
+    this.setState({disabled:true});
+    console.log(event.target.files[0]);
+    API.upload(event.target.files[0]).then(response => {
+      this.setState({Resume:[response.data.secure_url]});
+      this.setState({disabled:''});
+    }
+    )
+  }
+  onClickConnect=function(event){
+    event.preventDefault();
+    let Email=this.state.Email;
+    let Password=this.state.Password;
     API.authentification(Email,Password).then((res) => {
-       {res.data[0].Usertype==='Recruiter' ?  this.props.history.push('/Rec_home') : window.location.reload()}
-       {res.data[0].Usertype==='JobSeeker' ?  this.props.history.push('/Jobhome')  : window.location.reload()}
-    });
+      {res.data.length  ?
+       [(res.data[0].Usertype==='Recruiter' ?  this.props.history.push('/Rec_home') : this.props.history.push('/Jobhome'))]
+       : this.setState({invalid:true,Email:'',Password:''})
+     } 
+   })
   }
   render() {
     return (
      <div>
      <Modal
+     ariaHideApp={false}
      isOpen={this.state.modalIsOpen1}
      onAfterOpen={this.afterOpenModal1}
      onRequestClose={this.closeModal1.bind(this)}
      style={customStyles}
      >
      <div className='container'>
-     <label><h2 className="center-align">Sign Up</h2></label>
+     <label><h3 className="center-align">Sign Up</h3>
+     </label>
      <form >
      <input className='input-field' onChange={this.onChange.bind(this)} placeholder="First"/>
      <input className='input-field' onChange={this.onChange.bind(this)} placeholder="Last"/>
-     <input className='input-field' onChange={this.onChange.bind(this)} placeholder="Email" />
+     <input className='input-field' onChange={this.onChange.bind(this)} placeholder="Email"/>
      <input className='input-field' onChange={this.onChange.bind(this)} placeholder="Password"/>
      <select className='show-on-large' onChange={this.onChangeUser.bind(this)}> 
      <option value="Recruiter" >Recruiter</option>
@@ -93,16 +109,20 @@ API.newuser(user).then(
      <div className="file-field input-field">
      <div className="btn">
      <span>Resume</span>
-     <input type="file" onChange={this.onChange.bind(this)}/>
+     <input type="file" onChange={this.Upload.bind(this)}/>
      </div>
      <div className="file-path-wrapper">
-     <input className="file-path validate" type="text"/>
+     <input disabled="disabled" className="file-path disav" type="text"/>
      </div>
      </div>
      :null}
      </form>
      <div className='row' style={{marginTop:'10px'}}>
-     <a onClick={this.onClickSubmit.bind(this)}className="waves-effect waves-light btn right">Join</a>
+     {this.state.Email || this.state.Password ?
+     <a onClick={this.onClickSubmit.bind(this)} disabled={this.state.disabled} className="waves-effect waves-light btn right">
+     {this.state.disabled ?"Loading...": 'Join'}
+     </a>
+      :null}
      </div>
      </div>
      </Modal>
@@ -111,12 +131,15 @@ API.newuser(user).then(
      onAfterOpen={this.afterOpenModal2}
      onRequestClose={this.closeModal2.bind(this)}
      style={customStyles}
+     ariaHideApp={false}
      >
      <div className='container'>
-     <label><h2 className="center-align">Sign In</h2></label>
+     <label>
+     <h3 className="center-align">Sign In</h3></label>
+     {this.state.invalid ? <div className='red-text center-align'>Invalid email or password</div> :null}
      <form >
-     <input className='input-field' onChange={this.onChange.bind(this)} placeholder="Email" />
-     <input className='input-field' onChange={this.onChange.bind(this)} placeholder="Password"/>
+     <input className='input-field' value={this.state.Email} onChange={this.onChange.bind(this)} placeholder="Email" />
+     <input className='input-field' value={this.state.Password} onChange={this.onChange.bind(this)} placeholder="Password"/>
      </form>
      <div className='row' style={{marginTop:'10px'}}>
      <a onClick={this.onClickConnect.bind(this)}className="waves-effect waves-light btn right">Connect</a>
@@ -124,12 +147,12 @@ API.newuser(user).then(
      </div>
      </Modal>
      <div className="navbar-fixed">
-     <nav className="grey lighten-2" role="navigation">
+     <nav className="grey lighten-2">
      <div className="nav-wrapper container"><a id="logo-container" className="material-icons red-text darken-2">videocam</a>
      <ul className="right hide-on-med-and-down">
      <li><a onClick={this.openModal2.bind(this)} className="red-text darken-2">Sign in</a></li>
      </ul>
-     <ul id="nav-mobile" className="side-nav">
+     <ul className="side-nav">
      <li><a  className="red-text darken-2">Sign in</a></li>
      </ul>
      <a data-activates="nav-mobile" className="button-collapse"><i className="material-icons">menu</i></a>
@@ -146,7 +169,7 @@ API.newuser(user).then(
  <h5 className="header col s12 light">A job seeking platform that allows recruiters to view short videos of potential candidates before moving forward to next steps</h5>
  </div>
  <div className="row center">
- <a onClick={this.openModal1.bind(this)} id="download-button" className="btn-large waves-light red darken-2">Join The Team</a>
+ <a onClick={this.openModal1.bind(this)} className="btn-large waves-light red darken-2">Join The Team</a>
  </div>
  <br /><br />
  </div>
@@ -207,17 +230,17 @@ API.newuser(user).then(
 <div className="col l3 s12">
 <h5 className="white-text"><i className="fa fa-github-alt" aria-hidden="true" /></h5>
 <ul>
-<li><a className="white-text" href="https://github.com/MoudGW" target="_blank"><i className="fa fa-arrow-circle-o-left" aria-hidden="true" /></a></li>
-<li><a className="white-text" href="https://github.com/UniversalStudentOfLife" target="_blank"><i className="fa fa-arrow-circle-o-left" aria-hidden="true" /></a></li>
-<li><a className="white-text" href="https://github.com/vwhite324" target="_blank"><i className="fa fa-arrow-circle-o-left" aria-hidden="true" /></a></li>
-<li><a className="white-text" href="https://github.com/wehbs" target="_blank"><i className="fa fa-arrow-circle-o-left" aria-hidden="true" /></a></li>
+<li><a className="white-text" href="https://github.com/MoudGW"><i className="fa fa-arrow-circle-o-left" aria-hidden="true" /></a></li>
+<li><a className="white-text" href="https://github.com/UniversalStudentOfLife" ><i className="fa fa-arrow-circle-o-left" aria-hidden="true" /></a></li>
+<li><a className="white-text" href="https://github.com/vwhite324" ><i className="fa fa-arrow-circle-o-left" aria-hidden="true" /></a></li>
+<li><a className="white-text" href="https://github.com/wehbs" ><i className="fa fa-arrow-circle-o-left" /></a></li>
 </ul>
 </div>
 </div>
 </div>
 <div className="footer-copyright">
 <div className="container">
-Made by <a className="orange-text text-lighten-3" href="#">The Triple C Team</a>
+Made by <a className="orange-text text-lighten-3">The Triple C Team</a>
 </div>
 </div>
 </footer>

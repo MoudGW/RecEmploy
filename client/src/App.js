@@ -7,12 +7,11 @@ import home from "./components/home";
 import NotFound from "./components/error";
 const App = () =>
     <BrowserRouter>
-     <div>
-        <Route exact path="/" component={home}>
-         <Route path="*" component={NotFound} />
-        </Route>
+      <div>
+        <Route exact path="/" component={home}/>
         <Route  path="/Jobhome" component={Jobhome}/>
         <Route  path="/Rec_home" component={Rec_home}/>
+        <Route  path="/Upload" component={NotFound}/>
       </div>
     </BrowserRouter>
 

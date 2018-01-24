@@ -25,14 +25,13 @@ class Jobhome extends Component {
           <h3>{job.title}</h3>
         </span>
         <br></br>
-        <strong>Description:</strong>
-        <p>{job.description}</p>
-        <span><strong>Type: </strong>{job.type}</span>
+        <p><strong>Description: </strong>{job.description}</p>
+        <p><strong>Type: </strong>{job.type}</p>
         <p><strong>Locations: </strong>{job.locations}</p>
         <p><strong>classification: </strong>{job.classification}</p>
-         <div className='right'>
-         <button className='waves-effect waves-light btn'>apply</button>
-         </div>
+        <div className='right'>
+        <button className='waves-effect waves-light btn'>apply</button>
+        </div>
          </li>
         )
      )
@@ -40,15 +39,17 @@ class Jobhome extends Component {
       render() {
         return (
         <div>  
-        <nav>
-        <div className="nav-wrapper">
+        <div className="navbar-fixed">
+        <nav className="grey lighten-2">
+        <div className="nav-wrapper container">
         <a className="brand-logo">RecEmploy<i className="large material-icons">insert_chart</i></a>
         <ul id="nav-mobile" className="right hide-on-med-and-down">
-        <li><a href="#">Profile</a></li>
-        <li className='blue'><a href="#">Sign Out</a></li>
+        <li><a className='blue-text'>Profile</a></li>
+        <li ><a className='red-text'>Sign Out</a></li>
         </ul>
         </div>
         </nav>
+        </div>
         <div className="container bar">
         <div className="row">
         <div className="col l12 center">

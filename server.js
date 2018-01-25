@@ -4,7 +4,18 @@ const bluebird = require("bluebird");
 const bodyParser = require("body-parser");
 const path=require('path');
 const app = express();
-
+const server = require('http').Server(app);
+const db = process.env.MONGODB_URI || "mongodb://localhost/rec";
+mongoose.connect(db, function(error) {
+  // Log any errors connecting with mongoose
+  if (error) {
+    console.error(error);
+  }
+  // Or log a success message
+  else {
+    console.log("mongoose connection is successful");
+  }
+});
 //const port = 9000;
 // Set up a default port, configure mongoose, configure our middleware
 const PORT = process.env.PORT || 3001;
@@ -29,21 +40,12 @@ var router = new express.Router();
 router.get("/data/:search", jobsController.findjob);
 router.get("/:email/:pwd", jobsController.finduser);
 router.get("/data/", jobsController.findall);
+router.get("/:id", jobsController.findbyid);
 router.post("/addjob", jobsController.insertjob);
 router.post("/adduser", jobsController.insertuser);
-const db = process.env.MONGODB_URI || "mongodb://localhost/rec";
-mongoose.connect(db, function(error) {
-  // Log any errors connecting with mongoose
-  if (error) {
-    console.error(error);
-  }
-  // Or log a success message
-  else {
-    console.log("mongoose connection is successful");
-  }
-});
+
 
 
 app.use(router);
 
-app.listen(PORT);
+server.listen(PORT);

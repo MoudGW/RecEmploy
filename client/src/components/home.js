@@ -26,8 +26,6 @@ class home extends Component {
     disabled:'',
     invalid: false
   };
-  componentDidMount() {
-  }
   openModal1() {
     this.setState({modalIsOpen1: true});
     this.closeModal2()
@@ -139,7 +137,7 @@ class home extends Component {
      {this.state.invalid ? <div className='red-text center-align'>Invalid email or password</div> :null}
      <form >
      <input className='input-field' value={this.state.Email} onChange={this.onChange.bind(this)} placeholder="Email" />
-     <input className='input-field' value={this.state.Password} onChange={this.onChange.bind(this)} placeholder="Password"/>
+     <input className='input-field'type="password" value={this.state.Password} onChange={this.onChange.bind(this)} placeholder="Password"/>
      </form>
      <div className='row' style={{marginTop:'10px'}}>
      <a onClick={this.onClickConnect.bind(this)}className="waves-effect waves-light btn right">Connect</a>

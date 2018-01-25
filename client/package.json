@@ -7,10 +7,12 @@
     "axios": "^0.16.2",
     "jsx-html-class": "^1.0.3",
     "react": "^15.6.1",
+    "react-bootstrap": "^0.32.1",
     "react-dom": "^15.6.1",
     "react-modal": "^3.1.11",
     "react-router-dom": "^4.2.2",
-    "react-scripts": "^1.0.17"
+    "react-scripts": "^1.0.17",
+    "recordrtc": "^5.4.6"
   },
   "scripts": {
     "start": "react-scripts start",

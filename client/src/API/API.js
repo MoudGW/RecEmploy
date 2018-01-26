@@ -30,9 +30,19 @@ const API = {
 },
 getjobid: function(id) {
     return axios.get("/"+id);
+},
+addapli: function(appli)
+{
+    return axios.post('/addApli',appli);
+},
+findbyrecruiter: function(recruiter)
+{
+    return axios.get('/job/'+recruiter);
+},
+getAplsbyapplicant: function(applicant)
+{
+    return axios.get('/'+applicant);
 }
-
-
 }
 
 export default API

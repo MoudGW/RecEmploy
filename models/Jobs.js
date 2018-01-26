@@ -25,8 +25,8 @@ title:{
     type: String,
     required: true
   },
-  question:{
-    type: [String],
+  Recruiter:{
+    type:String,
     required: true
   }
 

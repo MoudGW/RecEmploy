@@ -12,8 +12,8 @@ const customStyles = {
     marginRight           : '-50%',
     transform             : 'translate(-50%, -50%)'
   }
-};  
-class home extends Component {
+ };  
+ class home extends Component {
   state = {
     modalIsOpen1: false,
     modalIsOpen2: false,
@@ -76,9 +76,11 @@ class home extends Component {
     let Password=this.state.Password;
     API.authentification(Email,Password).then((res) => {
       {res.data.length  ?
-       [(res.data[0].Usertype==='Recruiter' ?  this.props.history.push('/Rec_home') : this.props.history.push('/Jobhome'))]
+       [(res.data[0].Usertype==='Recruiter' ?  this.props.history.push('/Rec_home') : 
+        this.props.history.push('/Jobhome'))]
        : this.setState({invalid:true,Email:'',Password:''})
-     } 
+     }
+     {res.data.length  ? sessionStorage.setItem("_id",res.data[0]._id):null}; 
    })
   }
   render() {
@@ -137,7 +139,7 @@ class home extends Component {
      {this.state.invalid ? <div className='red-text center-align'>Invalid email or password</div> :null}
      <form >
      <input className='input-field' value={this.state.Email} onChange={this.onChange.bind(this)} placeholder="Email" />
-     <input className='input-field'type="password" value={this.state.Password} onChange={this.onChange.bind(this)} placeholder="Password"/>
+     <input className='input-field' type="Password" value={this.state.Password} onChange={this.onChange.bind(this)} placeholder="Password"/>
      </form>
      <div className='row' style={{marginTop:'10px'}}>
      <a onClick={this.onClickConnect.bind(this)}className="waves-effect waves-light btn right">Connect</a>

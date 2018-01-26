@@ -7,3 +7,9 @@ margin-top: 50px;
 .icon-block .material-icons {
 	font-size: inherit;
 }
+.video{
+	width:inherit ;
+}
+.videocontent{
+	width:200% ;
+}

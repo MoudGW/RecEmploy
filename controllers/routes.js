@@ -1,5 +1,6 @@
 var Jobs = require("../models/Jobs.js");
 var user =require("../models/user.js");
+var Apli =require("../models/Applications.js");
 module.exports = {
   findjob: function(req, res) {
   console.log("Gathering saved articles from the db");
@@ -11,7 +12,7 @@ module.exports = {
   },
   findall: function(req, res) {
   console.log("Gathering saved articles from the db");
-    user.find().then(function(doc) {
+    Jobs.find().then(function(doc) {
       res.json(doc);
     }).catch(function(err) {
       res.json(err);
@@ -38,7 +39,45 @@ module.exports = {
     }).catch(function(err) {
       res.json(err);
     });
-  }
+  },
+  findbyid: function(req, res) {
+  console.log("Gathering saved articles from the db");
+    Jobs.find({_id:req.params.id}).then(function(doc) {
+      res.json(doc);
+    }).catch(function(err) {
+      res.json(err);
+    });
+  },
+  findApli: function(req, res) {
+    Apli.find({jobsid:req.params.jobid}).then(function(doc) {
+      res.json(doc);
+    }).catch(function(err) {
+      res.json(err);
+    });
+  },
+  insertApli:function(req, res) {
+    Apli.create(req.body).then(function(data) {
+      console.log("data:", data);
+    }).catch(function(err) {
+      res.json(err);
+    });
+  },
+  findbyrecruiter: function(req, res) {
+  console.log(req);
+    Jobs.find({'Recruiter':req.params.Recruiter}).then(function(doc) {
+      res.json(doc);
+    }).catch(function(err) {
+      res.json(err);
+    });
+  },
+  findbyApplibyApplicant: function(req, res) {
+  console.log("Gathering saved articles from the db");
+    Apli.find({Applicant_id:req.params.id}).then(function(doc) {
+      res.json(doc);
+    }).catch(function(err) {
+      res.json(err);
+    });
+  } 
 
 
 };

@@ -32,10 +32,7 @@ var userschema = new Schema({
   },
   resume: {
   type: String,
-  },
-  Jobs:{
-   type :[Number], 
-  } 
+  }
 });
 
 // Create the JobSeeker model with Mongoose

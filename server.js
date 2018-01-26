@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const path=require('path');
 const app = express();
 const server = require('http').Server(app);
-const db = process.env.MONGODB_URI || "mongodb://localhost/rec";
+const db = process.env.MONGODB_URI || "mongodb://localhost/record";
 mongoose.connect(db, function(error) {
   // Log any errors connecting with mongoose
   if (error) {
@@ -43,9 +43,10 @@ router.get("/data/", jobsController.findall);
 router.get("/:id", jobsController.findbyid);
 router.post("/addjob", jobsController.insertjob);
 router.post("/adduser", jobsController.insertuser);
-
-
-
+router.post("/addApli", jobsController.insertApli);
+router.get("/findApli/:idjob", jobsController.findApli);
+router.get("/jobbyid/:recruiter", jobsController.findbyrecruiter);
+router.get("/appli/:id", jobsController.findbyApplibyApplicant);
 app.use(router);
 
 server.listen(PORT);

@@ -7,13 +7,13 @@ state={
   classification:'',
   type:'',
   description:'',
-  Recruiter:'',
+  recruiter:'',
   jobs:[],
   applications:[]
 }
 componentWillMount(){
     let id=sessionStorage.getItem("_id");
-    this.setState({Recruiter:id})
+    this.setState({recruiter:id})
     API.findbyrecruiter(id).then((res) =>{
       console.log(id)
       console.log(res)
@@ -41,22 +41,21 @@ API.addjob(data).then(
 getappli= ()=>{
      return(
      this.state.jobs.map(job =>
-      <li className="collection-item" key={job._id}>  
-      {API.getAplsbyapplicant(job._id).then((res) =>{this.setState({applications:res.data})})}
-      <span><h3>{job.title}</h3></span>
-      <br></br>
+      <li className="collection-item" style={{padding:'20px'}} key={job._id}> 
+       <span><strong>Title :</strong>{job.title}</span>
+       <br></br>
            <ul>
-             { this.state.applications.map(app =>{
-              <li key={job._id}>
+              this.state.applications.map(app =>{
+              <li key={app._id}>
               <span><h3>{app.jobsid}</h3></span>
               <span><h3>{app.Applicant_id}</h3></span>
               <span><h3>{app.URL_Video}</h3></span>
               </li>
              } )} 
            </ul>
-      </li>
-   ))
-}
+      </li>))
+    }
+   
 render() {
   return (
     <div>  
@@ -111,10 +110,11 @@ render() {
     <div className="col s6">
     <div className='center-align' style={{marginTop:'50px'}}>
     <label><h4>Jobs</h4></label>
-    <ul>
-        {this.state.jobs.length ? this.state.getappli() : <div>no jobs found</div>}
-    </ul>
+
     </div>
+    <ul class="collection">
+      {this.state.jobs.length ? this.getappli() : <div>no jobs found</div>}
+    </ul>
     </div>
     </div>
     </div>

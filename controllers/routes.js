@@ -63,8 +63,8 @@ module.exports = {
     });
   },
   findbyrecruiter: function(req, res) {
-  console.log(req);
-    Jobs.find({'Recruiter':req.params.Recruiter}).then(function(doc) {
+    Jobs.find({Recruiter:req.params.recruiter}).then(function(doc) {
+      console.log(req.params.recruiter)
       res.json(doc);
     }).catch(function(err) {
       res.json(err);
@@ -72,7 +72,7 @@ module.exports = {
   },
   findbyApplibyApplicant: function(req, res) {
   console.log("Gathering saved articles from the db");
-    Apli.find({Applicant_id:req.params.id}).then(function(doc) {
+    Apli.find({Applicant_id:req.params.applicant}).then(function(doc) {
       res.json(doc);
     }).catch(function(err) {
       res.json(err);

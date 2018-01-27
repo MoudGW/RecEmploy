@@ -106,6 +106,7 @@ class Jobhome extends Component {
      this.setState({modalIsOpen: false});
      }
      displayresult=() => {
+      console.log(this)
      return(
      this.state.jobs.map(job =>
         <li className="collection-item" style={{padding:'50px',borderBottom:'1px solid gray'}} key={job._id}>  

@@ -37,6 +37,7 @@ app.use((req, res, next) => {
 });
 var jobsController = require("./controllers/routes.js");
 var router = new express.Router();
+router.get("/job/:recruiter", jobsController.findbyrecruiter);
 router.get("/data/:search", jobsController.findjob);
 router.get("/:email/:pwd", jobsController.finduser);
 router.get("/data/", jobsController.findall);
@@ -45,7 +46,6 @@ router.post("/addjob", jobsController.insertjob);
 router.post("/adduser", jobsController.insertuser);
 router.post("/addApli", jobsController.insertApli);
 router.get("/findApli/:idjob", jobsController.findApli);
-router.get("/jobbyid/:recruiter", jobsController.findbyrecruiter);
 router.get("/appli/:id", jobsController.findbyApplibyApplicant);
 app.use(router);
 

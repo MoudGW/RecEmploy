@@ -39,9 +39,9 @@ findbyrecruiter: function(recruiter)
 {
     return axios.get('/job/'+recruiter);
 },
-getAplsbyapplicant: function(applicant)
+getAplication: function()
 {
-    return axios.get('/'+applicant);
+    return axios.get('/all');
 }
 }
 

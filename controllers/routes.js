@@ -10,12 +10,22 @@ module.exports = {
       res.json(err);
     });
   },
-  findall: function(req, res) {
+  find: function(req, res) {
   console.log("Gathering saved articles from the db");
     Jobs.find().then(function(doc) {
       res.json(doc);
     }).catch(function(err) {
       res.json(err);
+    });
+  }, 
+  findall: function(req, res) {
+    Jobs.find()
+    .populate({
+    path: 'applications',
+    populate: { path: 'Applicant_id' }})
+    .exec(function (err, story) {
+    if (err) return handleError(err);
+    res.send(story);
     });
   },
   insertjob: function(req, res) {
@@ -41,33 +51,40 @@ module.exports = {
     });
   },
   findbyid: function(req, res) {
-  console.log("Gathering saved articles from the db");
-    Jobs.find({_id:req.params.id}).then(function(doc) {
-      res.json(doc);
+    console.log("Gathering saved articles from the db");
+    Jobs.find({_id:req.params.id}).then(function(data) {
+      console.log("data:", data);
     }).catch(function(err) {
       res.json(err);
     });
   },
   findApli: function(req, res) {
-    Apli.find({jobsid:req.params.jobid}).then(function(doc) {
+    Apli.find().then(function(doc) {
       res.json(doc);
+      console.log(doc)
     }).catch(function(err) {
       res.json(err);
     });
   },
   insertApli:function(req, res) {
     Apli.create(req.body).then(function(data) {
+       Jobs.update(
+       { _id: req.body.jobsid}, 
+       { $push: {applications: data._id} }
+       ).then(function(data) {console.log(data)});
       console.log("data:", data);
     }).catch(function(err) {
       res.json(err);
     });
   },
   findbyrecruiter: function(req, res) {
-    Jobs.find({Recruiter:req.params.recruiter}).then(function(doc) {
-      console.log(req.params.recruiter)
-      res.json(doc);
-    }).catch(function(err) {
-      res.json(err);
+    Jobs.find({Recruiter:req.params.recruiter})
+    .populate({
+    path: 'applications',
+    populate: { path: 'Applicant_id' }})
+    .exec(function (err, story) {
+    if (err) return handleError(err);
+    res.send(story);
     });
   },
   findbyApplibyApplicant: function(req, res) {

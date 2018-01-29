@@ -40,12 +40,11 @@ var router = new express.Router();
 router.get("/job/:recruiter", jobsController.findbyrecruiter);
 router.get("/data/:search", jobsController.findjob);
 router.get("/:email/:pwd", jobsController.finduser);
-router.get("/data/", jobsController.findall);
 router.get("/:id", jobsController.findbyid);
+router.get("/data/all/all", jobsController.findall);
 router.post("/addjob", jobsController.insertjob);
 router.post("/adduser", jobsController.insertuser);
 router.post("/addApli", jobsController.insertApli);
-router.get("/findApli/:idjob", jobsController.findApli);
 router.get("/appli/:id", jobsController.findbyApplibyApplicant);
 app.use(router);
 

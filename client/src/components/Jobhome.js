@@ -67,14 +67,16 @@ class Jobhome extends Component {
         console.log('enter then statement')
         if(success) {
           console.log(success.data.secure_url)
+          this.setState({disabled: 'disabled'});
+          this.setState({modalIsOpen: false});
           this.setState({uploading: false });
           let data={
            'jobsid':this.state.target,
            'Applicant_id':sessionStorage.getItem('_id'),
            'URL_Video':success.data.secure_url
           }
-          API.addapli(data).then(()=>{
-            console.log('sent');
+          API.addapli(data).then((res)=>{
+            console.log(res);
           });
         }
       }, (error) => {
@@ -106,7 +108,6 @@ class Jobhome extends Component {
      this.setState({modalIsOpen: false});
      }
      displayresult=() => {
-      console.log(this)
      return(
      this.state.jobs.map(job =>
         <li className="collection-item" style={{padding:'50px',borderBottom:'1px solid gray'}} key={job._id}>  
@@ -136,7 +137,7 @@ class Jobhome extends Component {
         <div className='video'>
         <video className='videocontent' autoPlay muted src={this.state.src}></video>
         <div className='center' style={{width:'200%'}}>
-        {this.state.uploading ?<a className="btn btn-floating btn-large pulse"><i className="material-icons">cloud</i>uploading</a>:
+        {this.state.uploading ?<a className="btn btn-floating btn-large pulse" disabled='disabled'><i className="material-icons">cloud</i>uploading</a>:
         <div>
         <a className="waves-light red btn" disabled={!this.state.disabled} onClick={this.startRecord.bind(this)}><i className="material-icons left">fiber_manual_record</i>Start</a>
         <a className="waves-light btn" disabled={this.state.disabled} onClick={this.stopRecord.bind(this)}><i className="material-icons left">send</i>Stop & Send</a></div>}</div>

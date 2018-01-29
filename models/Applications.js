@@ -4,21 +4,14 @@ var Schema = mongoose.Schema;
 
 var ApSchema = new Schema({
 
-  jobsid:{
-  type: Number,
-  required: true
-  },
-  Applicant_id: {
-  type: Number,
-  required: true
-  },
+  Applicant_id:{ type: Schema.Types.ObjectId, ref: 'user' },
   URL_Video: {
   type: String
   }
 
 });
 // Create the Recruiter  model with Mongoose
-var Aplication  = mongoose.model('ApSchem', ApSchema);
+var Aplication  = mongoose.model('Aplication', ApSchema);
 
 // Export the Model
-module.exports = Aplication  ;
+module.exports = Aplication ;

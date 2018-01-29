@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import API from '../API/API';
+let id=sessionStorage.getItem("_id");
 class Rec_home extends Component {
+
 state={
   title:'',
   location:'',
@@ -8,18 +10,16 @@ state={
   type:'',
   description:'',
   recruiter:'',
-  jobs:[],
-  applications:[]
+  jobs:[]
 }
-componentWillMount(){
-    let id=sessionStorage.getItem("_id");
+componentDidMount(){
+    let id=sessionStorage.getItem("_id")
     this.setState({recruiter:id})
     API.findbyrecruiter(id).then((res) =>{
-      console.log(id)
-      console.log(res)
     this.setState({jobs:res.data})
-  })
- }
+   }
+  )
+}
 onChange= function(event) {
   this.setState({[event.target.placeholder]: event.target.value});
 }
@@ -32,34 +32,39 @@ onClick= function(event) {
     'type':this.state.type,
     'description':this.state.description,
     'Recruiter':sessionStorage.getItem("_id")
- };
-API.addjob(data).then(
-   console.log(data)
-  );
- }
-
-getappli= ()=>{
-     return(
-     this.state.jobs.map(job =>
+  }
+  API.addjob(data).then();
+  API.findbyrecruiter(id).then((res) =>{
+  this.setState({jobs:res.data})
+  })
+  }
+  getjobslist= ()=>{
+      return(
+      this.state.jobs.map(job =>
       <li className="collection-item" style={{padding:'20px'}} key={job._id}> 
-       <span><strong>Title :</strong>{job.title}</span>
-       <br></br>
-           <ul>
-              this.state.applications.map(app =>{
-              <li key={app._id}>
-              <span><h3>{app.jobsid}</h3></span>
-              <span><h3>{app.Applicant_id}</h3></span>
-              <span><h3>{app.URL_Video}</h3></span>
-              </li>
-             } )} 
-           </ul>
-      </li>))
-    }
+      <span><strong>Title :</strong>{job.title}</span>
+      <ul className="collection">
+       {job.applications.length ?
+           job.applications.map(app =>
+            <li className="collection-item" style={{padding:'20px'}} key={app._id}> 
+            <div><strong>Name :</strong>{app.Applicant_id.First+' '+app.Applicant_id.Last}</div>
+             <p>Resume<a href={app.Applicant_id.resume} download> <i className="material-icons">cloud_download</i></a></p>
+             <video width="400" controls>
+             <source src={app.URL_Video} type="video/mp4"/>
+              Your browser does not support HTML5 video.
+             </video>
+            </li>)
+       :<div>no applications found</div>}
+       </ul>
+      </li>
+     )
+    )
+  }
    
 render() {
   return (
     <div>  
-           <div className="navbar-fixed">
+        <div className="navbar-fixed">
         <nav className="grey lighten-2">
         <div className="nav-wrapper container">
         <a className="brand-logo">RecEmploy<i className="large material-icons">insert_chart</i></a>
@@ -70,16 +75,16 @@ render() {
         </div>
         </nav>
         </div>
-    <div className="container">
-    <div className="row">
-    <div className="col s6">
-    <div className='center-align' style={{marginTop:'50px'}}>
-    <label><h4>Add A Job</h4></label>
-    </div>
-    <form>
-    <div className="row">
-    <div className="input-field col s12">
-    <input type="text" onChange={this.onChange.bind(this)} placeholder='title'/>
+        <div className="container">
+        <div className="row">
+        <div className="col s6">
+        <div className='center-align' style={{marginTop:'50px'}}>
+        <label><h4>Add A Job</h4></label>
+        </div>
+        <form>
+        <div className="row">
+        <div className="input-field col s12">
+        <input type="text" onChange={this.onChange.bind(this)} placeholder='title'/>
     </div>
     </div>
     <div className="row">
@@ -110,16 +115,15 @@ render() {
     <div className="col s6">
     <div className='center-align' style={{marginTop:'50px'}}>
     <label><h4>Jobs</h4></label>
-
     </div>
-    <ul class="collection">
-      {this.state.jobs.length ? this.getappli() : <div>no jobs found</div>}
+    <ul className="collection">
+      {this.state.jobs.length ? this.getjobslist() : <div className='center-align'>no jobs found</div>}
     </ul>
     </div>
     </div>
     </div>
-  
     </div>
+
     )
   }
 }

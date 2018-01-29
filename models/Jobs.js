@@ -4,8 +4,8 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var JobsSchema = new Schema({
-
-title:{
+  
+  title:{
   type: [String],
   required: true
   },
@@ -27,13 +27,13 @@ title:{
   },
   Recruiter:{
     type:String,
-    required: true
-  }
+  },
+  applications: [{ type: Schema.Types.ObjectId, ref: 'Aplication' }]
 
 });
 JobsSchema.index({title: 'text'});
 // Create the Recruiter  model with Mongoose
-var Jobs  = mongoose.model('jobs ', JobsSchema);
+var Jobs  = mongoose.model('jobs', JobsSchema);
 
 // Export the Model
 module.exports = Jobs ;

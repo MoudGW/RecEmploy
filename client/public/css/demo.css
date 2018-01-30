@@ -13,3 +13,31 @@ margin-top: 50px;
 .videocontent{
 	width:200% ;
 }
+#index-banner{
+	background-image: url(background.svg);
+    background-repeat-x: no-repeat;
+    background-position: center;
+}
+#index-recruiter{
+	background-image: url(background_recruiter.svg);
+    background-repeat-x: no-repeat;
+    background-position: center;
+}
+.logo{
+font-family: 'Supermercado One', cursive;
+color:#001f3f;	
+font-size: 34px;
+}
+.sign{
+	font-family: 'Catamaran', sans-serif;
+	font-size: 20px;
+    border-radius: 10px;
+    color: black;
+}
+.result{
+	font-family: 'Slabo 27px', serif;
+	font-size: 20px;
+}
+.job{
+	background-color: white;
+}

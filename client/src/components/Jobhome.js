@@ -137,23 +137,39 @@ class Jobhome extends Component {
         <div className='video'>
         <video className='videocontent' autoPlay muted src={this.state.src}></video>
         <div className='center' style={{width:'200%'}}>
-        {this.state.uploading ?<a className="btn btn-floating btn-large pulse" disabled='disabled'><i className="material-icons">cloud</i>uploading</a>:
+        {this.state.uploading ?<a className="btn btn-large" disabled='disabled'>uploading</a>:
         <div>
         <a className="waves-light red btn" disabled={!this.state.disabled} onClick={this.startRecord.bind(this)}><i className="material-icons left">fiber_manual_record</i>Start</a>
         <a className="waves-light btn" disabled={this.state.disabled} onClick={this.stopRecord.bind(this)}><i className="material-icons left">send</i>Stop & Send</a></div>}</div>
         </div>
         </Modal>  
-        <div className="navbar-fixed">
-        <nav className="grey lighten-2">
-        <div className="nav-wrapper container">
-        <a className="brand-logo">RecEmploy<i className="large material-icons">insert_chart</i></a>
-        <ul id="nav-mobile" className="right hide-on-med-and-down">
-        <li><a className='blue-text'>Profile</a></li>
-        <li ><a className='red-text'>Sign Out</a></li>
-        </ul>
-        </div>
-        </nav>
-        </div>
+         {/* start NavBar */}
+     <div className="navbar-fixed">
+     <nav className="grey lighten-2">
+     <div className="nav-wrapper container">
+     <span className='logo'>RecEmploy</span>
+     <ul className="right hide-on-med-and-down">
+      <li>
+     <a className="sign bleu">Profile</a>
+     </li>
+     <li>
+     <a  className="sign red-text">Sign Out</a>
+     </li>
+     </ul>
+     <ul className="side-nav">
+     <li>
+     <a className="sign bleu darken-2">Profile</a>
+     </li>
+     <li>
+     <a className="sign red darken-2">Sign Out</a>
+     </li>
+     </ul>
+     <a data-activates="nav-mobile" className="button-collapse"><i className="material-icons">menu</i></a>
+     </div>
+     </nav>
+     </div>
+     {/* End NavBar */}
+ {/* Center */}
         <div className="container bar">
         <div className="row">
         <div className="col s12 center">

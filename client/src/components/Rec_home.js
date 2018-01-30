@@ -34,9 +34,10 @@ onClick= function(event) {
     'Recruiter':sessionStorage.getItem("_id")
   }
   API.addjob(data).then();
+  setTimeout(()=>
   API.findbyrecruiter(id).then((res) =>{
   this.setState({jobs:res.data})
-  })
+  }),100);
   }
   getjobslist= ()=>{
       return(
@@ -47,14 +48,14 @@ onClick= function(event) {
        {job.applications.length ?
            job.applications.map(app =>
             <li className="collection-item" style={{padding:'20px'}} key={app._id}> 
-            <div><strong>Name :</strong>{app.Applicant_id.First+' '+app.Applicant_id.Last}</div>
-             <p>Resume<a href={app.Applicant_id.resume} download> <i className="material-icons">cloud_download</i></a></p>
+            <div style={{padding:'5px'}}><strong>Applicant Name :</strong><p className='chip'>{app.Applicant_id.First+' '+app.Applicant_id.Last}</p></div>
              <video width="400" controls>
              <source src={app.URL_Video} type="video/mp4"/>
               Your browser does not support HTML5 video.
              </video>
+            <a className="waves-light btn right" href={app.Applicant_id.resume} download='resume.pdf'><i className="material-icons right">save</i>Resume</a>
             </li>)
-       :<div>no applications found</div>}
+       :<div style={{padding:'20px'}} className='center result'>No applications found</div>}
        </ul>
       </li>
      )
@@ -64,22 +65,38 @@ onClick= function(event) {
 render() {
   return (
     <div>  
-        <div className="navbar-fixed">
-        <nav className="grey lighten-2">
-        <div className="nav-wrapper container">
-        <a className="brand-logo">RecEmploy<i className="large material-icons">insert_chart</i></a>
-        <ul id="nav-mobile" className="right hide-on-med-and-down">
-        <li><a className='blue-text'>Profile</a></li>
-        <li ><a className='red-text'>Sign Out</a></li>
-        </ul>
-        </div>
-        </nav>
-        </div>
-        <div className="container">
+         {/* start NavBar */}
+     <div className="navbar-fixed">
+     <nav className="grey lighten-2">
+     <div className="nav-wrapper container">
+     <span className='logo'>RecEmploy</span>
+     <ul className="right hide-on-med-and-down">
+      <li>
+     <a className="sign bleu ">Profile</a>
+     </li>
+     <li>
+     <a  className="sign red-text">Sign Out</a>
+     </li>
+     </ul>
+     <ul className="side-nav">
+     <li>
+     <a className="sign bleu darken-2">Profile</a>
+     </li>
+     <li>
+     <a className="sign red darken-2">Sign Out</a>
+     </li>
+     </ul>
+     <a data-activates="nav-mobile" className="button-collapse"><i className="material-icons">menu</i></a>
+     </div>
+     </nav>
+     </div>
+     {/* End NavBar */}
+     {/* Center */}
+        <div className="container" id='index-recruiter'>
         <div className="row">
-        <div className="col s6">
-        <div className='center-align' style={{marginTop:'50px'}}>
-        <label><h4>Add A Job</h4></label>
+        <div className="col s6 collection job">
+        <div className='center-align' style={{marginTop:'10px'}}>
+        <label ><h1 className='chip' style={{fontSize:'15px'}}>Add A Job</h1></label>
         </div>
         <form>
         <div className="row">
@@ -112,12 +129,12 @@ render() {
     <i className="material-icons right">send</i>
     </a>
     </div>
-    <div className="col s6">
-    <div className='center-align' style={{marginTop:'50px'}}>
-    <label><h4>Jobs</h4></label>
-    </div>
+    <div className="col s6 collection job">
+  <div className='center-align' style={{marginTop:'10px'}}>
+        <label ><h1 className='chip' style={{fontSize:'15px'}}>Jobs</h1></label>
+        </div>
     <ul className="collection">
-      {this.state.jobs.length ? this.getjobslist() : <div className='center-align'>no jobs found</div>}
+      {this.state.jobs.length ? this.getjobslist() : <div className='center-align result'>No jobs found</div>}
     </ul>
     </div>
     </div>

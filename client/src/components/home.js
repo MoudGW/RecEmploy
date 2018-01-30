@@ -94,7 +94,7 @@ const customStyles = {
      style={customStyles}
      >
      <div className='container'>
-     <label><h3 className="center-align">Sign Up</h3>
+     <label><h3 className="center-align sign">Sign Up</h3>
      </label>
      <form >
      <input className='input-field' onChange={this.onChange.bind(this)} placeholder="First"/>
@@ -135,7 +135,7 @@ const customStyles = {
      >
      <div className='container'>
      <label>
-     <h3 className="center-align">Sign In</h3></label>
+     <h3 className="center-align sign">Sign In</h3></label>
      {this.state.invalid ? <div className='red-text center-align'>Invalid email or password</div> :null}
      <form >
      <input className='input-field' value={this.state.Email} onChange={this.onChange.bind(this)} placeholder="Email" />
@@ -146,32 +146,41 @@ const customStyles = {
      </div>
      </div>
      </Modal>
+      {/* start NavBar */}
      <div className="navbar-fixed">
      <nav className="grey lighten-2">
-     <div className="nav-wrapper container"><a id="logo-container" className="material-icons red-text darken-2">videocam</a>
+     <div className="nav-wrapper container">
+     <span className='logo'>RecEmploy</span>
      <ul className="right hide-on-med-and-down">
-     <li><a onClick={this.openModal2.bind(this)} className="red-text darken-2">Sign in</a></li>
+     <li>
+     <a onClick={this.openModal2.bind(this)} className="sign">Sign in</a>
+     </li>
      </ul>
      <ul className="side-nav">
-     <li><a  className="red-text darken-2">Sign in</a></li>
+     <li>
+     <a onClick={this.openModal2.bind(this)} className="sign darken-2">Sign in</a>
+     </li>
      </ul>
      <a data-activates="nav-mobile" className="button-collapse"><i className="material-icons">menu</i></a>
      </div>
      </nav>
      </div>
-   {/* End NavBar */}
+     {/* End NavBar */}
  {/* Center */}
- <div className="section no-pad-bot" id="index-banner">
- <div className="container">
+ <div className="section no-pad-bot">
+ <div className="container" id="index-banner">
  <br /><br />
- <h1 className="header center red-text darken-2">rec<span className="header center orange-text text-lighten-3">Employ</span></h1>
+ <br /><br />
+ <br /><br />
+ <br /><br />
+ <div className="row center">
+ <a onClick={this.openModal1.bind(this)} className="btn waves-light ">Join The Team</a>
+ </div>
+ <br /><br />
+ <br /><br />
+ </div>
  <div className="row center">
  <h5 className="header col s12 light">A job seeking platform that allows recruiters to view short videos of potential candidates before moving forward to next steps</h5>
- </div>
- <div className="row center">
- <a onClick={this.openModal1.bind(this)} className="btn-large waves-light red darken-2">Join The Team</a>
- </div>
- <br /><br />
  </div>
  </div>
 {/* End Center */}
@@ -211,7 +220,7 @@ const customStyles = {
 </div>
 {/* End Cards Section */}
 {/* Footer */}
-<footer className="page-footer red darken-2">
+<footer className="page-footer red">
 <div className="container">
 <div className="row">
 <div className="col l6 s12">
@@ -220,7 +229,7 @@ const customStyles = {
 </div>
 <div className="col l3 s12">
 <h5 className="white-text">Founders</h5>
-<ul>
+<ul className="white-text">
 <li>M. Mohamed Jedeine</li>
 <li>Josh Suhre</li>
 <li>Vince White</li>

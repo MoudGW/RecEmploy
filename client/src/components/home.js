@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom'
 import API from '../API/API';
 import Modal from 'react-modal';
 import decode from 'jwt-decode';
+let that;
 const customStyles = {
   content : {
     width                 : "50%",
@@ -57,9 +58,25 @@ const customStyles = {
       'resume':this.state.Resume,
       'Usertype':this.state.user
     };
-    API.newuser(user).then(
-      this.closeModal1()
-      ) 
+    API.newuser(user).then((res,err)=>{
+      if(res.data.errors)
+      {
+
+        console.log(res.data.errors)
+        if(res.data.errors.Pwd)
+        {
+         this.setState({Password:res.data.errors.Pwd.message});
+        }
+       for (var i in res.data.errors) {
+         console.log(res.data.errors[i])
+         this.setState({[i]:res.data.errors[i].message});
+        }
+
+      }  
+
+      //this.closeModal1()
+    }
+      )
   }
   Upload=function(event)
   {
@@ -111,10 +128,11 @@ const customStyles = {
      <label><h3 className="center-align sign">Sign Up</h3>
      </label>
      <form >
-     <input className='input-field' onChange={this.onChange.bind(this)} placeholder="First"/>
-     <input className='input-field' onChange={this.onChange.bind(this)} placeholder="Last"/>
-     <input className='input-field' onChange={this.onChange.bind(this)} placeholder="Email"/>
-     <input className='input-field' onChange={this.onChange.bind(this)} placeholder="Password"/>
+
+     <input className='input-field' value={this.state.First}  onChange={this.onChange.bind(this)} placeholder="First"/>
+     <input className='input-field' value={this.state.Last}  onChange={this.onChange.bind(this)} placeholder="Last"/>
+     <input className='input-field' value={this.state.Email}  onChange={this.onChange.bind(this)} placeholder="Email"/>
+     <input className='input-field' value={this.state.Password}  onChange={this.onChange.bind(this)} placeholder="Password"/>
      <select className='show-on-large' onChange={this.onChangeUser.bind(this)}> 
      <option value="Recruiter" >Recruiter</option>
      <option value="JobSeeker">Job Seeker</option>

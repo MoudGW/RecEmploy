@@ -5,7 +5,7 @@ const bodyParser = require("body-parser");
 const path=require('path');
 const app = express();
 const server = require('http').Server(app);
-const db = process.env.MONGODB_URI || "mongodb://localhost/record";
+const db = process.env.MONGODB_URI || "mongodb://localhost/record2";
 mongoose.connect(db, function(error) {
   // Log any errors connecting with mongoose
   if (error) {

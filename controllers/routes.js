@@ -40,9 +40,9 @@ module.exports = {
   },
   insertuser: function(req, res) {
     user.create(req.body).then(function(data) {
-      console.log("data:", data);
+      res.send(data)
     }).catch(function(err) {
-      res.json(err);
+      res.send(err);
     });
   },
   finduser: function(req,res){

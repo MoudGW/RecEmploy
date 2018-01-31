@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from 'react-router-dom'
 import API from '../API/API';
 import Modal from 'react-modal';
+import decode from 'jwt-decode';
 const customStyles = {
   content : {
     width                 : "50%",
@@ -68,20 +69,33 @@ const customStyles = {
       this.setState({Resume:[response.data.secure_url]});
       this.setState({disabled:''});
     }
-    )
+  )
   }
   onClickConnect=function(event){
     event.preventDefault();
-    let Email=this.state.Email;
-    let Password=this.state.Password;
-    API.authentification(Email,Password).then((res) => {
-      {res.data.length  ?
-       [(res.data[0].Usertype==='Recruiter' ?  this.props.history.push('/Rec_home') : 
-        this.props.history.push('/Jobhome'))]
-       : this.setState({invalid:true,Email:'',Password:''})
-     }
-     {res.data.length  ? sessionStorage.setItem("_id",res.data[0]._id):null}; 
-   })
+    let user={
+      'email':this.state.Email,
+      'pwd':this.state.Password  
+    }
+    API.authent(user).then((res) => {
+        {res.data.token ? 
+         this.connect(res.data.token)
+         :this.setState({invalid:true,Email:'',Password:''})}
+      })
+    }
+  connect =function(token){
+  const decoded = decode(token);
+  console.log(decoded)
+  sessionStorage.setItem('_id',decoded._id);
+  sessionStorage.setItem('type',decoded.type);
+  if(decoded.type==='JobSeeker')
+  {
+  this.props.history.push('/Jobhome')
+  }
+  if(decoded.type==='Recruiter')
+  {
+  this.props.history.push('/Rec_home')
+  }
   }
   render() {
     return (

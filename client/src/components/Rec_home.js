@@ -12,6 +12,14 @@ state={
   recruiter:'',
   jobs:[]
 }
+componentWillMount() {
+           let id= sessionStorage.getItem('_id');
+           let user=sessionStorage.getItem('type'); 
+            if(!id || user!='Recruiter')
+           {
+            this.props.history.push('/')
+           }
+}
 componentDidMount(){
     let id=sessionStorage.getItem("_id")
     this.setState({recruiter:id})

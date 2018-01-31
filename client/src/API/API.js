@@ -12,6 +12,9 @@ const API = {
  authentification: function(email,pwd) {
     return axios.get("/"+email+"/"+pwd);
  },
+ authent: function(user) {
+    return axios.post("/login",user);
+ },
  upload: function(file){
     const formData = new FormData();
     formData.append("file", file);
@@ -44,7 +47,6 @@ getAplication: function()
     return axios.get('/all');
 }
 }
-
 export default API
 export function captureUserMedia(callback) {
   var params = { audio: true, video: true };

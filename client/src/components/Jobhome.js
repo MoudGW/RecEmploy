@@ -34,7 +34,14 @@ class Jobhome extends Component {
     componentDidMount() {
            that=this;
     }
-    
+    componentWillMount() {
+           let id= sessionStorage.getItem('_id');
+           let user=sessionStorage.getItem('type'); 
+           if(!id || user!='JobSeeker')
+           {
+            this.props.history.push('/')
+           }
+    }
    requestUserMedia() {
     console.log('requestUserMedia')
     captureUserMedia((stream) => {

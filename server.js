@@ -39,7 +39,7 @@ var jobsController = require("./controllers/routes.js");
 var router = new express.Router();
 router.get("/job/:recruiter", jobsController.findbyrecruiter);
 router.get("/data/:search", jobsController.findjob);
-router.get("/:email/:pwd", jobsController.finduser);
+router.post('/login',jobsController.signin); 
 router.get("/:id", jobsController.findbyid);
 router.get("/data/all/all", jobsController.findall);
 router.post("/addjob", jobsController.insertjob);

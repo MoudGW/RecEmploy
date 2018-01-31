@@ -6,6 +6,7 @@
   "dependencies": {
     "axios": "^0.16.2",
     "jsx-html-class": "^1.0.3",
+    "jwt-decode": "^2.2.0",
     "react": "^15.6.1",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^15.6.1",

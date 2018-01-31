@@ -1,6 +1,9 @@
 var Jobs = require("../models/Jobs.js");
 var user =require("../models/user.js");
 var Apli =require("../models/Applications.js");
+var jwt = require('jsonwebtoken');
+let TOKEN_SECRET= process.env.TOKEN_SECRET || 'pvpnCCZfwOF85pBjbOebZiYIDhZ3w9LZrKwBZ7152K89mPCOHtbRlmr5Z91ci4L';
+
 module.exports = {
   findjob: function(req, res) {
   console.log("Gathering saved articles from the db");
@@ -94,7 +97,26 @@ module.exports = {
     }).catch(function(err) {
       res.json(err);
     });
-  } 
-
+  },
+  signin : function(req, res) {
+    user.findOne({Email:req.body.email,Pwd:req.body.pwd}).then((user,err)=> {
+        let playload={
+          '_id':user._id,
+          'type':user.Usertype
+        }
+        if(err){
+            return ;
+        }
+        if(!user){
+            return res.status(404).json({'message':'User not found!'});
+        }
+        let token = jwt.sign(playload,TOKEN_SECRET, {
+            expiresIn: 1440 // expires in 1 hour
+        });
+        console.log(token)
+        res.json({error:false,token:token});    }).catch(function(err) {
+        res.json(err);
+    });
+      } 
 
 };

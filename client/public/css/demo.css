@@ -19,9 +19,7 @@ margin-top: 50px;
     background-position: center;
 }
 #index-recruiter{
-	background-image: url(background_recruiter.svg);
-    background-repeat-x: no-repeat;
-    background-position: center;
+
 }
 .logo{
 font-family: 'Supermercado One', cursive;
@@ -40,4 +38,7 @@ font-size: 34px;
 }
 .job{
 	background-color: white;
+}
+.form{
+	margin: 0px !important;
 }

@@ -140,13 +140,13 @@ class Jobhome extends Component {
         onRequestClose={this.closeModal.bind(this)}
         style={customStyles}
         >
-        <div className='center'><p>send a short video about yourself</p></div> 
+        <div className='center'><p style={{fontSize:'20px'}} className='chip'>send a short video about yourself</p></div> 
         <div className='video'>
         <video className='videocontent' autoPlay muted src={this.state.src}></video>
         <div className='center' style={{width:'200%'}}>
         {this.state.uploading ?<a className="btn btn-large" disabled='disabled'>uploading</a>:
         <div>
-        <a className="waves-light red btn" disabled={!this.state.disabled} onClick={this.startRecord.bind(this)}><i className="material-icons left">fiber_manual_record</i>Start</a>
+        <a className="waves-light white-text red btn" disabled={!this.state.disabled} onClick={this.startRecord.bind(this)}><i className="material-icons left">fiber_manual_record</i>Start</a>
         <a className="waves-light btn" disabled={this.state.disabled} onClick={this.stopRecord.bind(this)}><i className="material-icons left">send</i>Stop & Send</a></div>}</div>
         </div>
         </Modal>  
@@ -182,7 +182,7 @@ class Jobhome extends Component {
         <div className="col s12 center">
         <label><h1>Search for Jobs</h1></label>
         <div className="input-field flow-text center-align">
-        <input className="center-align" id="search" onChange={this.onChange.bind(this)} type="search"/>
+        <input style={{fontSize:'30px'}} className="center-align" id="search" onChange={this.onChange.bind(this)} type="search"/>
         <i onClick={this.onClick.bind(this)} className="material-icons Medium">search</i>
         </div>
         </div>

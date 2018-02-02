@@ -71,10 +71,12 @@ const customStyles = {
          console.log(res.data.errors[i])
          this.setState({[i]:res.data.errors[i].message});
         }
-
       }  
-
-      //this.closeModal1()
+             if(!res.data.errors)
+       {
+        this.closeModal1()
+        this.openModal2()
+       }
     }
       )
   }

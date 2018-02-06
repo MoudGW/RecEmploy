@@ -45,6 +45,12 @@ findbyrecruiter: function(recruiter)
 getAplication: function()
 {
     return axios.get('/all');
+},
+update: function(id,data){
+    return axios.post("/update/"+id,data);
+},
+getuser: function(id){
+    return axios.get("/user/"+id);
 }
 }
 export default API

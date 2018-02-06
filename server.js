@@ -46,6 +46,8 @@ router.post("/addjob", jobsController.insertjob);
 router.post("/adduser", jobsController.insertuser);
 router.post("/addApli", jobsController.insertApli);
 router.get("/appli/:id", jobsController.findbyApplibyApplicant);
+router.post('/update/:id',jobsController.update);
+router.get("/user/:id", jobsController.finduser); 
 app.use(router);
 
 server.listen(PORT);

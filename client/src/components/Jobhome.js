@@ -3,6 +3,7 @@ import API, {captureUserMedia}  from '../API/API';
 import RecordRTC from 'recordrtc';
 import Modal from 'react-modal';
     let that;
+     let id= sessionStorage.getItem('_id');
 const hasGetUserMedia = !!(navigator.getUserMedia || navigator.webkitGetUserMedia ||
                         navigator.mozGetUserMedia || navigator.msGetUserMedia);
 const customStyles = {
@@ -35,7 +36,6 @@ class Jobhome extends Component {
            that=this;
     }
     componentWillMount() {
-           let id= sessionStorage.getItem('_id');
            let user=sessionStorage.getItem('type'); 
            if(!id || user!='JobSeeker')
            {
@@ -157,7 +157,7 @@ class Jobhome extends Component {
      <span className='logo'>RecEmploy</span>
      <ul className="right hide-on-med-and-down">
       <li>
-     <a className="sign bleu">Profile</a>
+     <a onClick={()=>{this.props.history.push('/user/'+id)}} className="sign bleu">Profile</a>
      </li>
      <li>
      <a  className="sign red-text">Sign Out</a>
@@ -165,7 +165,7 @@ class Jobhome extends Component {
      </ul>
      <ul className="side-nav">
      <li>
-     <a className="sign bleu darken-2">Profile</a>
+     <a onClick={()=>{this.props.history.push('/user/'+id)}} className="sign bleu darken-2">Profile</a>
      </li>
      <li>
      <a className="sign red darken-2">Sign Out</a>
@@ -176,7 +176,7 @@ class Jobhome extends Component {
      </nav>
      </div>
      {/* End NavBar */}
- {/* Center */}
+     {/* Center */}
         <div className="container bar">
         <div className="row">
         <div className="col s12 center">

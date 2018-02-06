@@ -37,7 +37,23 @@ var userschema = new Schema({
   },
   resume: {
   type: String,
+  },
+  photo: {
+  type: String,
+  },
+    about: {
+  type: String,
+  },
+    experience: {
+  type: String,
+  },
+    skills: {
+  type: String,
+  },
+  video:{
+    type: String,
   }
+  
 });
 
 // Create the JobSeeker model with Mongoose

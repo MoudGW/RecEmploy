@@ -22,12 +22,8 @@ module.exports = {
     });
   }, 
   findall: function(req, res) {
-    Jobs.find()
-    .populate({
-    path: 'applications',
-    populate: { path: 'Applicant_id' }})
-    .exec(function (err, story) {
-    if (err) return handleError(err);
+    user.find()
+    .then(function (story) {
     res.send(story);
     });
   },
@@ -46,7 +42,7 @@ module.exports = {
     });
   },
   finduser: function(req,res){
-    user.find({Email:req.params.email,Pwd:req.params.pwd}).then(function(user) {
+    user.find({_id:req.params.id}).then(function(user) {
         console.log(user);
       res.json(user);
     }).catch(function(err) {
@@ -117,6 +113,15 @@ module.exports = {
         res.json({error:false,token:token});    }).catch(function(err) {
         res.json(err);
     });
-      } 
+  },
+  update: function(req, res) {
+    user.findOneAndUpdate({_id:req.params.id},req.body).then(function(doc) {
+      res.json(doc);
+    }).catch(function(err) {
+      res.json(err);
+    });
+  }
+
+
 
 };

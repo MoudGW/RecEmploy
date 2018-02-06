@@ -31,6 +31,7 @@ componentDidMount(){
 onChange= function(event) {
   this.setState({[event.target.placeholder]: event.target.value});
 }
+
 onClick= function(event) {
  event.preventDefault();
   let data={
@@ -42,11 +43,13 @@ onClick= function(event) {
     'Recruiter':sessionStorage.getItem("_id")
   }
   API.addjob(data).then();
+
   setTimeout(()=>
   API.findbyrecruiter(id).then((res) =>{
   this.setState({jobs:res.data})
-  }),100);
+  }),1000);
   }
+
   getjobslist= ()=>{
       return(
       this.state.jobs.map(job =>

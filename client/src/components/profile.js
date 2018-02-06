@@ -47,9 +47,12 @@ class profile extends Component {
     	let data={
     		[this.state.target]:this.state.targetvalue
     	}
-      API.update(id,data);
+      API.update(id,data).then(
+        ()=>{
+            this.closeModal()
+        })
     }
-      Upload=(event)=>
+    Upload=(event)=>
     {
     if(this.state.target==='photo')	
     {
@@ -136,11 +139,12 @@ class profile extends Component {
          <div className="container">
         <div className="row">
         <div className='col center s12 profile'>
+        {this.state.user.video ?
         <video width="800" height="400">
         <source src={this.state.user.video} type="video/mp4"/>
-        Your browser does not support the video tag.
-        </video>
-        {this.state.edit ?<a  onClick={this.update}  className="btn btn-floating shadow video-profile z-depth-5 edit"><i id='video' className="material-icons">edit</i></a>:null }
+        </video>: <img className='z-depth-1' height="400" src="http://surima.pl/media/surima-no-video.png"/>}
+        {this.state.edit ?<a  onClick={this.update}  className="btn btn-floating shadow video-profile z-depth-5 edit">
+        <i id='video' className="material-icons">edit</i></a>:null }
         </div>
         <div style={{position:"relative"}}className='col center s12'>
         <img className='profile-photo z-depth-5' width="250" height="250" src={this.state.user.photo ? this.state.user.photo :"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX7jsQsu-GP0SV74mjcvgACwxRZdXyv1z7Sut_Cwe-vBgn9SgV"}/>

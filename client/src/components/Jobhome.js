@@ -37,7 +37,7 @@ class Jobhome extends Component {
     }
     componentWillMount() {
            let user=sessionStorage.getItem('type'); 
-           if(!id || user!='JobSeeker')
+           if(!id || user!=='JobSeeker')
            {
             this.props.history.push('/')
            }
@@ -165,7 +165,7 @@ class Jobhome extends Component {
      </ul>
      <ul className="side-nav">
      <li>
-     <a onClick={()=>{this.props.history.push('/user/'+id)}} className="sign bleu darken-2">Profile</a>
+     <a onClick={()=>{this.props.history.push("/user/"+id)}} className="sign bleu darken-2">Profile</a>
      </li>
      <li>
      <a className="sign red darken-2">Sign Out</a>

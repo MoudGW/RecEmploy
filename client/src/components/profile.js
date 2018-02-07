@@ -22,7 +22,7 @@ class profile extends Component {
             this.props.history.push('/')
            }
            else{
- 		   API.getuser(id).then((user)=>{
+ 		   API.getuser(this.props.match.params.id).then((user)=>{
            this.setState({user:user.data[0]})
  		   });
  	       }
@@ -47,12 +47,15 @@ class profile extends Component {
     	let data={
     		[this.state.target]:this.state.targetvalue
     	}
-      API.update(id,data).then(
-        ()=>{
-            this.closeModal()
-        })
+        API.update(id,data).then(
+        ()=>{this.closeModal()
+           API.getuser(id).then((user)=>{
+           this.setState({user:user.data[0]})
+           });
+        });
+
     }
-    Upload=(event)=>
+      Upload=(event)=>
     {
     if(this.state.target==='photo')	
     {
@@ -64,7 +67,8 @@ class profile extends Component {
     }
     if (this.state.target==='video') {
     this.setState({disabled:true});
-    API.upload(event.target.files[0]).then(response => {
+    console.log(event.target.files)
+    API.uploadVideo(event.target.files[0]).then(response => {
     this.setState({targetvalue:[response.data.secure_url]});
     this.setState({disabled:''});
     })
@@ -105,7 +109,7 @@ class profile extends Component {
      {this.state.target==='photo' || this.state.target==='video' ?
      <div className="input-field"><input className="input-field" type='file' accept="file_extension|audio/*|video/*|image/*|media_type" onChange={this.Upload.bind(this)}/></div>
      :
-     <textarea onChange={this.onChange} className="materialize-textarea"></textarea> }
+     <textarea onChange={this.onChange}  className="materialize-textarea"></textarea> }
      <button onClick={this.onupdate} disabled={this.state.disabled} className="btn">update</button>
 
      </div>
@@ -140,15 +144,16 @@ class profile extends Component {
         <div className="row">
         <div className='col center s12 profile'>
         {this.state.user.video ?
-        <video width="800" height="400">
+        <video width="800" height="400" autoPlay>
         <source src={this.state.user.video} type="video/mp4"/>
-        </video>: <img className='z-depth-1' height="400" src="http://surima.pl/media/surima-no-video.png"/>}
-        {this.state.edit ?<a  onClick={this.update}  className="btn btn-floating shadow video-profile z-depth-5 edit">
-        <i id='video' className="material-icons">edit</i></a>:null }
+        </video>:<img className='z-depth-3' height="400" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPWjuwufWO6FVvErbELGvqNn6m9BgzQCNmDwvpTUVj_JpxCHtB"/>}
+        {this.state.edit ?
+         <a  onClick={this.update} className="btn btn-floating shadow video-profile z-depth-5 edit">
+         <i id='video' className="material-icons">edit</i></a>:null }
         </div>
         <div style={{position:"relative"}}className='col center s12'>
         <img className='profile-photo z-depth-5' width="250" height="250" src={this.state.user.photo ? this.state.user.photo :"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX7jsQsu-GP0SV74mjcvgACwxRZdXyv1z7Sut_Cwe-vBgn9SgV"}/>
-        {this.state.edit ?<a onClick={this.update} className="btn shadow btn-floating edit z-depth-5" ><i id='photo' className="material-icons">edit</i></a>:null }
+        {this.state.edit ?<a onClick={this.update} className="btn shadow btn-floating edit z-depth-5" ><i id='photo' className="material-icons">edit</i></a>:null}
         </div>
         <div className='col center s12'>
         <ul className="collection with-header">

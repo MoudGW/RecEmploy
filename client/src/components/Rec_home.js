@@ -15,7 +15,7 @@ state={
 componentWillMount() {
            let id= sessionStorage.getItem('_id');
            let user=sessionStorage.getItem('type'); 
-            if(!id || user!='Recruiter')
+            if(!id || user!=='Recruiter')
            {
             this.props.history.push('/')
            }
@@ -51,17 +51,16 @@ onClick= function(event) {
       return(
       this.state.jobs.map(job =>
       <li className="collection-item" style={{padding:'20px'}} key={job._id}> 
-      <div  className='row'><blockquote style={{fontSize:'20px'}} className="left gray-text">Title :{job.title}</blockquote></div>
+     <div  className='row'><blockquote style={{fontSize:'20px'}} >Title : {job.title}</blockquote></div>
       <ul className="collection z-depth-3">
        {job.applications.length ?
            job.applications.map(app =>
             <li className="collection-item" style={{padding:'20px'}} key={app._id}> 
-            <div style={{padding:'7px'}}><a onClick={()=>{this.props.history.push('/user/'+app._id)}} className='chip'>
-            <img src={!app.photo ? "https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg": app.photo}/>
-            {app.Applicant_id.First+' '+app.Applicant_id.Last}</a></div>
+            <div style={{padding:'7px'}}><div onClick={()=>{this.props.history.push("/user/"+app.Applicant_id._id)}} className='chip'>
+            <img src={!app.Applicant_id.photo ? "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX7jsQsu-GP0SV74mjcvgACwxRZdXyv1z7Sut_Cwe-vBgn9SgV" : app.Applicant_id.photo} />
+            {app.Applicant_id.First+' '+app.Applicant_id.Last}</div></div>
              <video width="400" controls>
              <source src={app.URL_Video} type="video/mp4"/>
-              Your browser does not support HTML5 video.
              </video>
              <a className="waves-light row center" href={app.Applicant_id.resume} download='resume.pdf'><i className="material-icons right">save</i>Resume</a>
             </li>)
@@ -82,7 +81,7 @@ render() {
      <span className='logo'>RecEmploy</span>
      <ul className="right hide-on-med-and-down">
       <li>
-     <a className="sign bleu ">Profile</a>
+     <a onClick={()=>{this.props.history.push('/user/'+id)}} className="sign bleu darken-2">Profile</a>
      </li>
      <li>
      <a  className="sign red-text">Sign Out</a>
@@ -139,11 +138,11 @@ render() {
     <i className="material-icons right">send</i>
     </a>
     </div>
-    <div className="col s6 collection job z-depth-1">
+    <div className="col s6 collection z-depth-1 job">
   <div className='center-align' style={{marginTop:'10px'}}>
         <label ><h1 className='chip' style={{fontSize:'20px'}}>Jobs</h1></label>
         </div>
-    <ul className="collection z-depth-3">
+    <ul className="collection z-depth-2">
       {this.state.jobs.length ? this.getjobslist() : <div className='center-align result'>No jobs found</div>}
     </ul>
     </div>

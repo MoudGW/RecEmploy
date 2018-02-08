@@ -13,8 +13,8 @@ state={
   jobs:[]
 }
 componentWillMount() {
-           let id=sessionStorage.getItem("_id");
-           let user=sessionStorage.getItem('type'); 
+           var id=sessionStorage.getItem("_id");
+           var user=sessionStorage.getItem('type'); 
             if(!id || user!=='Recruiter')
            {
             this.props.history.push('/')
@@ -41,12 +41,11 @@ onClick= function(event) {
     'description':this.state.description,
     'Recruiter':sessionStorage.getItem("_id")
   }
-  API.addjob(data).then(
-    ()=>{
+    API.addjob(data);
+    setTimeout(()=>{
      API.findbyrecruiter(id).then((res) =>{
   this.setState({jobs:res.data})
-    })}
-    );
+    })},1500)
   }
   getjobslist= ()=>{
       return(

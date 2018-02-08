@@ -13,7 +13,6 @@ state={
   jobs:[]
 }
 componentWillMount() {
-           let id= sessionStorage.getItem('_id');
            let user=sessionStorage.getItem('type'); 
             if(!id || user!=='Recruiter')
            {
@@ -41,11 +40,12 @@ onClick= function(event) {
     'description':this.state.description,
     'Recruiter':sessionStorage.getItem("_id")
   }
-  API.addjob(data).then();
-  setTimeout(()=>
-  API.findbyrecruiter(id).then((res) =>{
+  API.addjob(data).then(
+    ()=>{
+     API.findbyrecruiter(id).then((res) =>{
   this.setState({jobs:res.data})
-  }),1000);
+    })}
+    );
   }
   getjobslist= ()=>{
       return(

@@ -13,6 +13,7 @@ class profile extends Component {
     user:''
  	};
  	componentWillMount(){
+          console.log(id);
  		   if(this.props.match.params.id===id)
  		   {
  		   	this.setState({edit:true})

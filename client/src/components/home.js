@@ -3,7 +3,6 @@ import { withRouter } from "react-router-dom";
 import API from "../API/API";
 import Modal from "react-modal";
 import decode from "jwt-decode";
-let that;
 const customStyles = {
   content: {
     width: "50%",

@@ -13,6 +13,7 @@ state={
   jobs:[]
 }
 componentWillMount() {
+           let id=sessionStorage.getItem("_id");
            let user=sessionStorage.getItem('type'); 
             if(!id || user!=='Recruiter')
            {

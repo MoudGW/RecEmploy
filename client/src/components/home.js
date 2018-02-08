@@ -58,13 +58,12 @@ class home extends Component {
       Usertype: this.state.user
     };
     API.newuser(user).then((res, err) => {
+      console.log(res.data);
       if (res.data.errors) {
-        console.log(res.data.errors);
         if (res.data.errors.Pwd) {
           this.setState({ Password: res.data.errors.Pwd.message });
         }
         for (var i in res.data.errors) {
-          console.log(res.data.errors[i]);
           this.setState({ [i]: res.data.errors[i].message });
         }
       }
@@ -89,6 +88,7 @@ class home extends Component {
       pwd: this.state.Password
     };
     API.authent(user).then(res => {
+       console.log(res.data)
       {
         res.data.token
           ? this.connect(res.data.token)

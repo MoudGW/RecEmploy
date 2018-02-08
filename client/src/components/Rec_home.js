@@ -13,8 +13,8 @@ state={
   jobs:[]
 }
 componentWillMount() {
-           var id=sessionStorage.getItem("_id");
-           var user=sessionStorage.getItem('type'); 
+           let id=sessionStorage.getItem("_id");
+           let user=sessionStorage.getItem('type'); 
             if(!id || user!=='Recruiter')
            {
             this.props.history.push('/')

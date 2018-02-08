@@ -50,7 +50,7 @@ router.post('/update/:id',jobsController.update);
 router.get("/user/:id", jobsController.finduser); 
 router.get("/", function(req, res) {
 router.get("/*", function(req, res) {
-res.sendFile(path.join(__dirname, "/client/build/index.html"));
+res.sendFile(path.join(__dirname, "/client/public/index.html"));
 });
 
 

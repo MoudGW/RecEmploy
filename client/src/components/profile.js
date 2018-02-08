@@ -74,7 +74,10 @@ class profile extends Component {
     })
     }
     }
-
+         signout=()=>{
+      sessionStorage.clear();
+      this.props.history.push('/');
+     }
     render() {
     return (
      <div>
@@ -124,7 +127,7 @@ class profile extends Component {
      <a onClick={this.props.history.goBack} className="sign bleu">Home</a>
      </li>
      <li>
-     <a  className="sign red-text">Sign Out</a>
+     <a  onClick={this.signout}  className="sign red-text">Sign Out</a>
      </li>
      </ul>
      <ul className="side-nav">
@@ -132,7 +135,7 @@ class profile extends Component {
      <a className="sign bleu darken-2">Profile</a>
      </li>
      <li>
-     <a className="sign red darken-2">Sign Out</a>
+     <a onClick={this.signout}  className="sign red darken-2">Sign Out</a>
      </li>
      </ul>
      <a data-activates="nav-mobile" className="button-collapse"><i className="material-icons">menu</i></a>
@@ -146,14 +149,17 @@ class profile extends Component {
         {this.state.user.video ?
         <video width="800" height="400" autoPlay>
         <source src={this.state.user.video} type="video/mp4"/>
-        </video>:<img className='z-depth-3' height="400" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPWjuwufWO6FVvErbELGvqNn6m9BgzQCNmDwvpTUVj_JpxCHtB"/>}
+        </video>:
+        <img className='z-depth-3' height="400" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPWjuwufWO6FVvErbELGvqNn6m9BgzQCNmDwvpTUVj_JpxCHtB"/>}
         {this.state.edit ?
          <a  onClick={this.update} className="btn btn-floating shadow video-profile z-depth-5 edit">
          <i id='video' className="material-icons">edit</i></a>:null }
         </div>
         <div style={{position:"relative"}}className='col center s12'>
-        <img className='profile-photo z-depth-5' width="250" height="250" src={this.state.user.photo ? this.state.user.photo :"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX7jsQsu-GP0SV74mjcvgACwxRZdXyv1z7Sut_Cwe-vBgn9SgV"}/>
-        {this.state.edit ?<a onClick={this.update} className="btn shadow btn-floating edit z-depth-5" ><i id='photo' className="material-icons">edit</i></a>:null}
+        <img className='profile-photo z-depth-5' width="250" height="250" src={this.state.user.photo ? 
+        this.state.user.photo :"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSX7jsQsu-GP0SV74mjcvgACwxRZdXyv1z7Sut_Cwe-vBgn9SgV"}/>
+        {this.state.edit ?<a onClick={this.update} className="btn shadow btn-floating edit z-depth-5" >
+        <i id='photo' className="material-icons">edit</i></a>:null}
         </div>
         <div className='col center s12'>
         <ul className="collection with-header">
@@ -161,7 +167,8 @@ class profile extends Component {
         <h4>About me</h4>
         <hr style={{width:'10%'}}/>
         <p className="flow-text">{this.state.user.about}</p>
-        {this.state.edit ? <a onClick={this.update} className="btn shadow btn-floating  z-depth-5"><i  id='about' className="material-icons">edit</i></a>:null }
+        {this.state.edit ? <a onClick={this.update} className="btn shadow btn-floating  z-depth-5">
+        <i  id='about' className="material-icons">edit</i></a>:null }
         </li>
         <li className="collection-item">
         <h4>Skills</h4>

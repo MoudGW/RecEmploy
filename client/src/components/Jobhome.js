@@ -114,6 +114,10 @@ class Jobhome extends Component {
      closeModal() {
      this.setState({modalIsOpen: false});
      }
+     signout=()=>{
+      sessionStorage.clear();
+      this.props.history.push('/');
+     }
      displayresult=() => {
      return(
      this.state.jobs.map(job =>
@@ -160,7 +164,7 @@ class Jobhome extends Component {
      <a onClick={()=>{this.props.history.push('/user/'+id)}} className="sign bleu">Profile</a>
      </li>
      <li>
-     <a  className="sign red-text">Sign Out</a>
+     <a onClick={this.signout} className="sign red-text">Sign Out</a>
      </li>
      </ul>
      <ul className="side-nav">
@@ -168,7 +172,7 @@ class Jobhome extends Component {
      <a onClick={()=>{this.props.history.push("/user/"+id)}} className="sign bleu darken-2">Profile</a>
      </li>
      <li>
-     <a className="sign red darken-2">Sign Out</a>
+     <a onClick={this.signout}  className="sign red darken-2">Sign Out</a>
      </li>
      </ul>
      <a data-activates="nav-mobile" className="button-collapse"><i className="material-icons">menu</i></a>

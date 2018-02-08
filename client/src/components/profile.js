@@ -13,6 +13,7 @@ class profile extends Component {
     user:''
  	};
  	componentWillMount(){
+          let id= sessionStorage.getItem('_id');
           console.log(id);
  		   if(this.props.match.params.id===id)
  		   {

@@ -11,5 +11,7 @@ For this matter a RecEmploy is an alternative to the old ways of recruiting, it 
 
 <p align="center">
   <img src="https://rishabh.io/tech/nodejs/img/nodejs.png" width="350"/>
-  <img src="your_relative_path_here_number_2_large_name" width="350"/>
+  <img src="https://laracasts.com/images/series/circles/do-you-react.png" width="350"/>
+   <img src="https://fancyshanty.com/wp-content/uploads/2016/09/icon-leaf.png" width="350"/>
+   <img src="https://webrtc.org/assets/images/webrtc-logo-vert-retro-255x305.png" width="350"/>
 </p>

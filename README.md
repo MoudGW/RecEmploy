@@ -18,5 +18,5 @@ For this matter a RecEmploy is an alternative to the old ways of recruiting, it 
 <p>
   <img height='200px' width="200px" src="https://cdn-images-1.medium.com/max/1600/1*pLhqRKXZAmpJP4wpEPfM4w.png"/>
   <img height='200px' width="400px" src="https://cdn-images-1.medium.com/max/788/1*0G_7Ab6ZzUMEe-RDJnGjKQ.png"/>
-  <img height='200px' width="400px" src="http://res.cloudinary.com/colinstodd-com/image/upload/c_fit/n9qdpfw4kwsjqox0lymi.png"/>
+  <img height='200px' width="200px" src="http://res.cloudinary.com/colinstodd-com/image/upload/c_fit/n9qdpfw4kwsjqox0lymi.png"/>
 </p>

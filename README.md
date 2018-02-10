@@ -1,6 +1,6 @@
 # RecEmploy
 ![Live Demo](https://https://warm-atoll-72755.herokuapp.com/)
-[![Current Version](under build)]
+![Current Version](under build)
 ## About
 
 
